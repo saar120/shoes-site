@@ -15,10 +15,6 @@ export default class MainPage extends Component {
   deleteHandler = async (id) => {
     await api.deleteItem(id);
     this.setItems();
-    // const deletedItem = this.state.items.find((item) => item.id === id);
-    // const newItemsList = [...this.state.items];
-    // newItemsList.splice(newItemsList.indexOf(deletedItem), 1);
-    // this.setState({ items: newItemsList });
   };
 
   renderItems = () => {
@@ -33,7 +29,7 @@ export default class MainPage extends Component {
   render() {
     return (
       <div className="main-container">
-        <h1>Welcome To My Useless Shop</h1>
+        <h1>Shoes Site Manager</h1>
         {this.state.loading && <Loader />}
         <div className="ui link cards">{this.renderItems()}</div>
       </div>
