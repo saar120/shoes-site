@@ -18,10 +18,17 @@ export default class MainPage extends Component {
   };
 
   renderItems = () => {
-    return this.state.items.map((item) => {
+    return this.filterItems(this.state.items, this.props.searchValue).map((item) => {
       return <ItemCard item={item} key={item.id} deleteItem={(id) => this.deleteHandler(id)} />;
     });
   };
+
+  filterItems = (items, value) => {
+    return items.filter((item) => {
+      return item.itemname.indexOf(value) !== -1;
+    });
+  };
+
   componentDidMount = () => {
     this.setItems();
   };

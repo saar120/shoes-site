@@ -4,18 +4,29 @@ import Error from "./Components/Error/Error";
 import Navbar from "./Components/Navbar";
 import EditPage from "./Pages/EditPage";
 import MainPage from "./Pages/MainPage";
+import React, { Component } from "react";
+import AddPage from "./Pages/AddPage";
 
-function App() {
-  return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={MainPage} />
-        <Route path="/edit/:id" exact component={EditPage} />
-        <Route path="/*" exact component={Error} />
-      </Switch>
-    </Router>
-  );
+export default class App extends Component {
+  state = { navSearchValue: "" };
+
+  searchHandler = (value) => {
+    this.setState({ navSearchValue: value });
+  };
+
+  render() {
+    return (
+      <Router>
+        <Navbar getValue={(value) => this.searchHandler(value)} />
+        <Switch>
+          <Route path="/" exact>
+            <MainPage searchValue={this.state.navSearchValue} />
+          </Route>
+          <Route path="/edit/:id" exact component={EditPage} />
+          <Route path="/add" exact component={AddPage} />
+          <Route path="/*" exact component={Error} />
+        </Switch>
+      </Router>
+    );
+  }
 }
-
-export default App;
